@@ -1,7 +1,7 @@
 var timerEl = document.getElementById("timer");
 var secondsLeft = 75;
 var questionArea = document.getElementById("question-area");
-
+var startButton = document.getElementById("start-btn");
 
 var questionsArr = [
         {
@@ -44,14 +44,17 @@ var questionsArr = [
             "Pulse Oximiter",
             "Reservoir Bag"
             ],
-        }
+        correctAnswer: 2
+        },
     ];
 
-
+var qIndex = 0;
 
 
 //Set time to 75seconds and count down
 function setTime() {
+    timerEl.textContent = 'Time Remaining: ' + secondsLeft;
+    
     var timerInterval = setInterval(function() {
         secondsLeft--;
         timerEl.textContent = 'Time Remaining: ' + secondsLeft;
@@ -64,36 +67,52 @@ function setTime() {
 }
 
 //function to render the question and answers
-function renderQuestion(questionsArr, questionArea) {
+function renderQuestion(questionsArr) {
     var answers; 
      
     //question rendering loop
-    for (var i = 0; i < questionsArr.length; i++){
+    //for (var i = 0; i < questionsArr.length; i++){
         answers = [];
            
         //print question to page
-           var  print = document.createElement("");
-           var  q = document.createTextNode(questionsArr[i].question);
+           var  print = document.createElement("div");
+           var  q = document.createTextNode(questionsArr[qIndex].question);
                
                 print.appendChild( q );
                 document.body.appendChild( q );
 
                 //create series of answer buttons
-           for (var n = 0; n < questionsArr[i].answers.length; n++) {
-            answers= questionsArr[i].answers[n];  
+           for (var n = 0; n < questionsArr[qIndex].answers.length; n++) {
+            answers= questionsArr[qIndex].answers[n];  
             
                 var btn = document.createElement("button");
                 var j = document.createTextNode(answers);
-                
+                var correctAnswer = questionsArr[qIndex].correctAnswer;
 
-                btn.setAttribute('class', 'btn btn-primary');
+                btn.setAttribute('class', 'btn btn-primary btn-block' );
                 btn.appendChild(j);
                 document.body.appendChild(btn);
+                
+                //Add click event to buttons that will decrease time for wrong answer
+                btn.addEventListener("click", function(event) {
+                    console.log(event);
+                    console.log(this);
+                var userAnswer = this.textContent;
+                var answerIndex = questionsArr.indexOf(userAnswer);
 
-         }
-    }
+                    // //if (answers[n] !== questionsArr[i].correctAnswer) {
+                        // secondsLeft-- ;
+                       
+                      
+                    // } else {
+                    //     renderQuestion(questionArr);
+                    
+                    // }
+                });
+            }
+ //   }
 }
 
 
-renderQuestion(questionsArr, questionArea);
-setTime();
+renderQuestion(questionsArr);
+startButton.addEventListener("click", setTime());
