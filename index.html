@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='UTF-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>Timed ACLS Quiz</title>
+</head>
+    <body>
+        
+        <!--Countdow Timer-->
+         <div class="timer-container">
+            Time Remaining: 0
+        </div>
+
+        <!--High Score link-->
+        <div class="high-score">
+            <div id=" view-high-score">
+                <a href="High-Score-Page.html"> View High-score </a>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>ACLS Quiz Challenge</h2>
+            <hr>
+            <main>To answer the following questions, you must use all your Advanced Cardiopulmonary Life Support knowledge! You will have 75 seconds to answer all the questions. 
+                  Correct answers will grant you a point. Answer incorrectly and you will lose precious time. If you are able to answer all the questions
+                  before time runs out, or if time runs out, the game is over.
+                  <br>
+                  <h4>Good Luck!</h4>
+                  
+            </main>
+            <br>
+            <!-- button links to quiz -->
+            <a class="btn btn-primary" href='Quiz.html' role="button">Start Quiz</a>
+        
+        </div>
+
+        </body>
+    <script src="script.js"></script>
+</html>
+
+<!--What does the code need to keep track of?
+     
+  #Things to Code
+
+    *Start Time / Total seconds
+    *var totalTime = 75;
+
+
+    *Elapsed time
+   *var elapsedTime = 0;
+
+
+    *Current Time HTML element
+   
+    *Current Time Left
+   
+   *Questions - List/Array (object)
+         
+        *Questions
+
+        *List of possible answers
+
+        *Correct Answer
+
+-------------------------------------------------------
+
+#Potential HTML elements
+ *Start Button
+  *var startButton = document.getElementId('start-button'); 
+*Form/Input to add user initials
+    
+ *Buttons for each answer
+
+    *Current time HTML element
+
+------------------------------------------------------
+
+What Actions does my code need to perform?
+
+* When user clicks start button, timer starts, prompt the first Question
+    Start game function
+
+
+*When user clicks answer button
+    *Validate if answer is Correct validateAnswer()
+    *If not correct: Deduct time from timer
+        if ( notValue)
+            removeAdditionalTime()
+            
+*Then Move to next Question
+
+*We need to use an interval to create a countdown - setInterval( callback, 1000ms or 1sec)
+    *Increment elapsedTime
+    *Calc current time left by subtracting totalTime - elapsedTime
+    *Check if timer has reached 0
+        *End the game
+    *Update the time left number in the HTML
+
+*Game end functionality
+    *Displays final score
+    *Provides input to enter initials
+
+*When user submits initials
+    *Add their high score and initials to local storage
+    *Display list of high scores to user
+
+-----------------------------------------------------
+How are the different actions going to run?
+
+*click Start button to run startGame()
+
+*Click answer button to run validateAnswer()
+
+*/
+</html>

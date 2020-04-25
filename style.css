@@ -1,0 +1,73 @@
+body{
+    background-image: url("https://image.freepik.com/free-vector/white-background-with-blue-tech-hexagon_1017-19366.jpg");
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* index formating   */
+
+.container{
+    margin: auto;
+    width: 50%;
+    padding-top: 10em;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+h2{
+    padding-bottom: 5px;
+}
+
+hr {
+    border-top: 2px solid black;
+    border-radius: 1px;
+}
+
+.timer-container {
+    text-align: center;
+    font-size: larger;
+    margin-right: 6%;
+    margin-top: 2%;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+    border: 2px solid grey;
+    float: right;
+    background-color: whitesmoke;
+}
+
+
+
+
+.high-score {
+    text-align: center;
+    font-size: larger;
+    margin-left: 6%;
+    margin-top: 2%;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+    border: 2px solid grey;
+    float: left;
+    background-color: whitesmoke;
+}
+
+a:link {
+    color: black;
+}
+
+a:visited{
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+#question-area {
+
+ text-align: center;
+ font-family: 'Roboto', sans-serif;
+ font-size: 25px;
+ font-weight: bold;
+}
