@@ -64,10 +64,17 @@ a:hover {
     color: black;
 }
 
-#question-area {
+#question-container {
 
  text-align: center;
  font-family: 'Roboto', sans-serif;
  font-size: 25px;
  font-weight: bold;
+}
+
+.btn-block {
+    max-width: 300px;
+    margin-left: 11em;
+    margin-top: 2em;
+    font-family: 'Roboto', sans-serif;
 }
