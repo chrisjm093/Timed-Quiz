@@ -4,12 +4,10 @@ var questionContainer = document.querySelector("#question-container");
 var startButton = document.getElementById("start-btn");
 var qIndex = 0;
 var score = 75;
-var highScoreList = document.querySelector("#high-score-list");
-var initialsInput = document.querySelector("#initials-text")
-var highScoreForm = document.querySelector("#high-score-form")
+
 //var feedbackTimer = 2
 //var feedbackEl = document.getElementsById("feedback");
-
+var timerContainer = document.getElementsByClassName("timer-container");
 var questionsArr = [
         {
         question : "What is the compression to breath ratio for a single rescuer?",
@@ -117,7 +115,7 @@ function renderQuestion() {
                 //create series of answer buttons
            for (var n = 0; n < questionsArr[qIndex].answers.length; n++) {
             answers= questionsArr[qIndex].answers[n];  
-                console.log(qIndex);    
+                   
             
                 var btn = document.createElement("button");
                 var j = document.createTextNode(answers);
@@ -157,10 +155,17 @@ function renderQuestion() {
 
 
 function endQuiz() {
-        score = secondsLeft
-        window.localStorage.setItem('score', score)
-        window.location.href = "High-Score-Page.html";
-        renderHighScores()
+      var removeDivs = document.body;
+    
+    score = secondsLeft
+    window.localStorage.setItem('score', score)
+    
+    removeDivs.innerHTML='';
+    ;
+   
+
+        //window.location.href = "High-Score-Page.html";
+        //renderHighScores()
         
         // highScoreForm.addEventListener("submit", function(event){
         //     event.preventDefault();
@@ -175,14 +180,22 @@ function endQuiz() {
         //     initialsInput.value = "";
         
         // });
+  // renderHighScores();
     };
 
 var storedScore = localStorage.getItem("score")
 
 var initialsArr = [];
 
-// function renderHighScores() {
-//     //clear high score list
+//  function renderHighScoreForm() {
+//     var newBody = document.createElement('body');
+//     var newForm = document.createElement('form');
+
+//     document.getElementbyTagName
+
+
+
+    //     //clear high score list
 //     highScoreList.innerHTML = "";
     
 //     //render high score list
