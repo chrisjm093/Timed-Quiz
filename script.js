@@ -2,6 +2,13 @@ var timerEl = document.getElementById("timer");
 var secondsLeft = 75;
 var questionContainer = document.querySelector("#question-container");
 var startButton = document.getElementById("start-btn");
+var qIndex = 0;
+var score = 75;
+var highScoreList = document.querySelector("#high-score-list");
+var initialsInput = document.querySelector("#initials-text")
+var highScoreForm = document.querySelector("#high-score-form")
+//var feedbackTimer = 2
+//var feedbackEl = document.getElementsById("feedback");
 
 var questionsArr = [
         {
@@ -75,11 +82,8 @@ var questionsArr = [
             "100 bpm"
             ],
         correctAnswer: "50 bpm"
-        }, 
+        } 
     ];
-
-var qIndex = 0;
-
 
 //Set time to 75seconds and count down
 function setTime() {
@@ -91,19 +95,18 @@ function setTime() {
 
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
-           
+           //endQuiz();
         }
     }, 1000);
 }
 
 //function to render the question and answers
 function renderQuestion() {
+   
     //clears previous question
     questionContainer.innerHTML="";
         var answers; 
         
-          //answers = [];
-           
         //print question to page
            var  print = document.createElement("div");
            var  q = document.createTextNode(questionsArr[qIndex].question);
@@ -114,7 +117,8 @@ function renderQuestion() {
                 //create series of answer buttons
            for (var n = 0; n < questionsArr[qIndex].answers.length; n++) {
             answers= questionsArr[qIndex].answers[n];  
-                
+                console.log(qIndex);    
+            
                 var btn = document.createElement("button");
                 var j = document.createTextNode(answers);
                 var correctAnswer = questionsArr[qIndex].correctAnswer;
@@ -123,30 +127,79 @@ function renderQuestion() {
                 btn.appendChild(j);
                 document.getElementById("question-container").appendChild(btn);
                 
-                //Add click event to buttons that will decrease time for wrong answer
+                //Add click event to buttons that will decrease time for wrong answer and initiate the next question if it is the correct answer
                 btn.addEventListener("click", function(event) {
-                    //console.log(event);
-                    //console.log(this);
-                    
+                     
                 var userAnswer = this.textContent;
-                //console.log(this)    
-                    if (userAnswer !== correctAnswer) {
-                        secondsLeft --;
+                    
 
+                    if (userAnswer !== correctAnswer) {
+                        //decreases time by one second if incorrect answer is clicked
+                        secondsLeft --;
+                        //feedbackEl.createTextNode("Wrong");
+                        
+                        //ends quiz if timer runs out or once last question is answered
+                    } else if (secondsLeft === 0 || qIndex === questionsArr.length - 1 ) {
+                        endQuiz()
+                        
+                        //transitions to next question if current question is answered correctly
                     } else {
                         qIndex ++;
-                       
                         
-
                         renderQuestion();
-                        //check out .removeChild to remove old buttons
                     };
-                
                     
                 });
             }
  
 }
+
+
+
+function endQuiz() {
+        score = secondsLeft
+        window.localStorage.setItem('score', score)
+        window.location.href = "High-Score-Page.html";
+        renderHighScores()
+        
+        // highScoreForm.addEventListener("submit", function(event){
+        //     event.preventDefault();
+        
+        //     var initialsText = initialsInput.nodeValue.trim();
+        //     console.log(initialsInput)
+        //     console.log(initialsText);
+        //     if (initialsText === "") {
+        //         return;
+        //     }
+        //     initialsArr.push(initialsText);
+        //     initialsInput.value = "";
+        
+        // });
+    };
+
+var storedScore = localStorage.getItem("score")
+
+var initialsArr = [];
+
+// function renderHighScores() {
+//     //clear high score list
+//     highScoreList.innerHTML = "";
+    
+//     //render high score list
+//     for (var x = 0; x < initialsArr.length; x++){
+//         var initials = initialsArr[x];
+//         var li = document.createElement("li");    
+        
+//         li.textContent = initials;
+//         li.setAttribute("data-index", x);
+
+//         highScoreList.appendChild(li);
+//     }
+// }
+ 
+
+
+
 
 
 renderQuestion();
