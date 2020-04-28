@@ -154,9 +154,6 @@ function renderQuestion() {
  
 }
 
-//parse all scores and initials from local storage
-
-
 // ends quiz, clears screen of quiz divs, stores score
 function endQuiz() {
       var removeDivs = document.body;
@@ -187,7 +184,7 @@ function endQuiz() {
 //     }
 // };
 
-// score displays with create elements, pull high score and display it, prompt user to enter initials in high score form.
+// score displays with form elements, pull high score and display it, prompt user to enter initials in high score form.
 
 function scoreDisplay() {
     var scoreDiv= document.createElement("div");
@@ -218,6 +215,7 @@ function scoreDisplay() {
     formInput.setAttribute("style", "margin-left 5px");
     submitBtn.setAttribute("style", "margin-left: 5px" );
     submitBtn.setAttribute("type", "submit");
+    
     //add an event listener that will store initials and high score with JSON stringify and initiate High Score page.
     submitForm();
     
@@ -248,6 +246,7 @@ function highScoreList(){
     var  highScoreLi = document.createElement( 'li' );
     var listInitials = localStorage.getItem('name');
     var listScore = localStorage.getItem('score');
+    
     //clear submit form
     removeDivs.innerHTML='';
    
@@ -260,8 +259,8 @@ function highScoreList(){
     //set attributes of list
     highScoreDiv.setAttribute("style", "margin-top: 10em; margin-left: 28em; width: 400px; padding: 10px; border: 2px solid grey; background-color: whitesmoke");
 
+    //display initials and score
     highScoreH2.textContent = "High Scores";
-
     highScoreLi.textContent = listInitials + "  ...............  " + listScore; 
     
     againBtn.setAttribute("class", "btn btn-primary btn-block ");
