@@ -4,6 +4,8 @@ var questionContainer = document.querySelector("#question-container");
 var startButton = document.getElementById("start-btn");
 var qIndex = 0;
 var score = 75;
+var scores = [];
+var names = [];
 
 //var feedbackTimer = 2
 //var feedbackEl = document.getElementsById("feedback");
@@ -152,69 +154,152 @@ function renderQuestion() {
  
 }
 
+//parse all scores and initials from local storage
 
 
+// ends quiz, clears screen of quiz divs, stores score
 function endQuiz() {
       var removeDivs = document.body;
     
-    score = secondsLeft
-    window.localStorage.setItem('score', score)
+    var score = secondsLeft
+    
+    localStorage.setItem('score', (score));
     
     removeDivs.innerHTML='';
-    ;
-   
+    scoreDisplay();
+};
 
-        //window.location.href = "High-Score-Page.html";
-        //renderHighScores()
-        
-        // highScoreForm.addEventListener("submit", function(event){
-        //     event.preventDefault();
-        
-        //     var initialsText = initialsInput.nodeValue.trim();
-        //     console.log(initialsInput)
-        //     console.log(initialsText);
-        //     if (initialsText === "") {
-        //         return;
-        //     }
-        //     initialsArr.push(initialsText);
-        //     initialsInput.value = "";
-        
-        // });
-  // renderHighScores();
-    };
-
-var storedScore = localStorage.getItem("score")
-
-var initialsArr = [];
-
-//  function renderHighScoreForm() {
-//     var newBody = document.createElement('body');
-//     var newForm = document.createElement('form');
-
-//     document.getElementbyTagName
-
-
-
-    //     //clear high score list
-//     highScoreList.innerHTML = "";
-    
-//     //render high score list
-//     for (var x = 0; x < initialsArr.length; x++){
-//         var initials = initialsArr[x];
-//         var li = document.createElement("li");    
-        
-//         li.textContent = initials;
-//         li.setAttribute("data-index", x);
-
-//         highScoreList.appendChild(li);
+// function getIt() {
+//     //get stored scores from local storage
+//     var storedScores = localStorage.getItem(score);
+//     if (storedScores !== null) {
+//         scores = storedScores;
+//         localStorage.setItem("scores", JSON.stringify(scores));
 //     }
-// }
+
+// };
+
+// function nameIt() {
+//     var storedInitials = localStorage.getItem("names");
+//     if (storedInitials !== null) {
+//         names = storedInitials;
+//         localStorage.setItem("names", JSON.stringify(names));
+//     }
+// };
+
+// score displays with create elements, pull high score and display it, prompt user to enter initials in high score form.
+
+function scoreDisplay() {
+    var scoreDiv= document.createElement("div");
+    var scoreH2 = document.createElement("h2");
+    var initialsForm= document.createElement("form");
+    var formLabel = document.createElement("label");
+    var formInput = document.createElement("input");
+    var submitBtn = document.createElement('input');
+    var endScore = localStorage.getItem('score', score);
+
+
+    //set text content of endgame elements
+    scoreH2.textContent = "Score: " + endScore;
+    formLabel.innerHTML = "Enter Initials:  ";
+    submitBtn.textContent = "Submit";
+
+    //append elements
+    document.body.appendChild(scoreDiv);
+    scoreDiv.appendChild(scoreH2);
+    scoreDiv.appendChild(initialsForm);
+    initialsForm.appendChild(formLabel);
+    initialsForm.appendChild(formInput);
+    initialsForm.appendChild(submitBtn);
+
+    //style elements
+    scoreDiv.setAttribute("style", "margin-top: 10em; margin-left: 28em; width: 400px; text-align: center; padding: 10px; border: 2px solid grey; background-color: whitesmoke");
+    scoreH2.setAttribute("style", "font-family: 'Roboto', sans-serif;");
+    formInput.setAttribute("style", "margin-left 5px");
+    submitBtn.setAttribute("style", "margin-left: 5px" );
+    submitBtn.setAttribute("type", "submit");
+    //add an event listener that will store initials and high score with JSON stringify and initiate High Score page.
+    submitForm();
+    
+    function submitForm() {
+        
+        submitBtn.addEventListener("click", function(event) {
+            
+            event.preventDefault();
+            name = formInput.value.trim();
+                   
+            localStorage.setItem('name', (name));
+                          
+         highScoreList();
+         });
+        };
+};
+
+// getIt();
+// nameIt();
+
+//render high score list 
+function highScoreList(){
+    var removeDivs = document.body;
+    var highScoreDiv = document.createElement('div');
+    var highScoreUl = document.createElement('ul');
+    var highScoreH2 = document.createElement('h2');
+    var againBtn = document.createElement('button');
+    var  highScoreLi = document.createElement( 'li' );
+    var listInitials = localStorage.getItem('name');
+    var listScore = localStorage.getItem('score');
+    //clear submit form
+    removeDivs.innerHTML='';
+   
+    //append high score list
+    document.body.appendChild(highScoreDiv);
+    highScoreDiv.appendChild(highScoreH2);
+    highScoreDiv.appendChild(highScoreUl);
+    highScoreUl.appendChild(highScoreLi);
+
+    //set attributes of list
+    highScoreDiv.setAttribute("style", "margin-top: 10em; margin-left: 28em; width: 400px; padding: 10px; border: 2px solid grey; background-color: whitesmoke");
+
+    highScoreH2.textContent = "High Scores";
+
+    highScoreLi.textContent = listInitials + "  ...............  " + listScore; 
+    
+    againBtn.setAttribute("class", "btn btn-primary btn-block ");
+    againBtn.setAttribute("style", "margin-left: 31em");
+    againBtn.setAttribute("onclick", "Timed-Quiz.index.html")
+    againBtn.textContent = "Play Again?" ;
+   
+    //document.body.appendChild(againBtn);
+    
+    // againBtn.addEventListener("click", function() {
+       
+    // });
+
+    
+    // //loop to generate high score list
+    // for (var z = 0; z < names.length; z++){
+    //     var nameItem = names[z];
+    //     console.log (nameItem)
+    //     var highScoreLi = document.createElement('li');
+    //     highScoreLi.textContent = nameItem; 
+    //     highScoreUl.appendChild(highScoreLi);
+        
+        
+        // for (var s = 0; s < scores.length; s++){
+        //     var scoreItem = scores[s];
+
+        //     highScoreLi.textContent = nameItem + ".........."+ scoreItem;
+
+        //     highScoreLi.setAttribute("data-index", s);
+        //     highScoreUl.appandChild(highScoreLi);
+            
+        // }
+
+          
+};
+
+
  
-
-
-
-
-
 renderQuestion();
 setTime();
 
